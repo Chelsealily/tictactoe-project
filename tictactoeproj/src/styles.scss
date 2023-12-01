@@ -1,0 +1,46 @@
+@use "./variables" as *;
+
+body {
+	margin: 0;
+}
+
+.heading {
+    color:$color-primary;
+    display: flex;
+    justify-content: center;
+	align-content: center;
+	font-size: 3rem;
+}
+
+.grid {
+	width: 100vw;
+	display: grid;
+	justify-content: center;
+	align-content: center;
+	grid-template-columns: repeat(3, auto)
+}
+
+.grid__box {
+    border: 2px solid $color-secondary;
+    width: 120px;
+    height: 120px;
+
+}
+
+.button{
+	display: flex;
+    justify-content: center;
+	align-content: center;
+	padding-top: 2rem;
+}
+
+.button__restart {
+	border: 2px solid $color-primary;
+	border-radius: 5%;
+    font-size: 1.2rem;
+    padding: 10px 10px;
+	background-color: $color-tertiary;
+	
+	
+}
+    
