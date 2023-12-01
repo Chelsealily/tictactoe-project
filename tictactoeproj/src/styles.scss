@@ -2,14 +2,19 @@
 
 body {
 	margin: 0;
+	background-image: url("./tictacs.png");
+	background-size: 100vw;
+	background-repeat: no-repeat;
+	padding-top: 35vw;
 }
 
 .heading {
-    color:$color-primary;
+	padding-top: 45px;
+    color:$color-tertiary;
     display: flex;
     justify-content: center;
 	align-content: center;
-	font-size: 3rem;
+	font-size: 2rem;
 }
 
 .grid {
@@ -17,13 +22,16 @@ body {
 	display: grid;
 	justify-content: center;
 	align-content: center;
-	grid-template-columns: repeat(3, auto)
+	grid-template-columns: repeat(3, auto);
+	
 }
 
 .grid__box {
     border: 2px solid $color-secondary;
-    width: 120px;
-    height: 120px;
+    width: 110px;
+    height: 110px;
+	background-color: $color-primary;
+	opacity: 0.5;
 
 }
 
@@ -31,7 +39,7 @@ body {
 	display: flex;
     justify-content: center;
 	align-content: center;
-	padding-top: 2rem;
+	padding-top: 3.5rem;
 }
 
 .button__restart {
