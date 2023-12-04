@@ -1,54 +1,35 @@
 @use "./variables" as *;
+@use "./layouts";
 
-body {
-	margin: 0;
-	background-image: url("./tictacs.png");
-	background-size: 100vw;
-	background-repeat: no-repeat;
-	padding-top: 35vw;
-}
+// Tablet & Laptop Media Query
 
-.heading {
-	padding-top: 45px;
-    color:$color-tertiary;
-    display: flex;
-    justify-content: center;
-	align-content: center;
-	font-size: 2rem;
-}
+@media screen and (min-width: 768px) {
 
-.grid {
-	width: 100vw;
-	display: grid;
-	justify-content: center;
-	align-content: center;
-	grid-template-columns: repeat(3, auto);
+	body {
+		background-size: 650px;
+	}
+
+	.heading {
+		font-size: 3rem;
+		padding-top: 80px;
+	}
+
+	.grid {
+		
+		width: 100vw;
+		
+	}
+
+	.grid__box {
+		width: 150px;
+		height: 150px;	
+	}
+
+	.button__restart {
+		font-size: 2rem;
+		padding: 15px 15px;
+		
+	}
 	
-}
-
-.grid__box {
-    border: 2px solid $color-secondary;
-    width: 110px;
-    height: 110px;
-	background-color: $color-primary;
-	opacity: 0.5;
-
-}
-
-.button{
-	display: flex;
-    justify-content: center;
-	align-content: center;
-	padding-top: 3.5rem;
-}
-
-.button__restart {
-	border: 2px solid $color-primary;
-	border-radius: 5%;
-    font-size: 1.2rem;
-    padding: 10px 10px;
-	background-color: $color-tertiary;
-	
-	
-}
+	}
     

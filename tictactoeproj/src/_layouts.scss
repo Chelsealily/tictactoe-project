@@ -1,0 +1,56 @@
+@use "./variables" as *;
+
+// Mob Optimized - Other sizes in ./_layouts
+
+body {
+	
+	background-image: url("./tictacs.png");
+	background-size: 450px;
+	background-repeat: no-repeat;
+	padding-top: 220px;
+	background-position: center 1%;
+}
+
+.heading {
+	color:$color-tertiary;
+    display: flex;
+    justify-content: center;
+	font-size: 1.8rem;
+}
+
+.grid {
+	width: 100vw;
+	display: grid;
+	justify-content: center;
+	align-content: center;
+	grid-template-columns: repeat(3, auto);
+	padding-top: 30px;
+	
+}
+
+.grid__box {
+    border: 3px solid $color-secondary;
+    width: 90px;
+    height: 90px;
+	background-color: $color-primary;
+	opacity: 0.5;
+
+}
+
+.button{
+	display: flex;
+    justify-content: center;
+	align-content: center;
+	padding-top: 7rem;
+}
+
+.button__restart {
+	border: 2px solid $color-tertiary;
+	border-radius: 5%;
+    font-size: 1rem;
+    padding: 10px 10px;
+	background-color: $color-tertiary;
+	color: $color-primary;
+	
+}
+
