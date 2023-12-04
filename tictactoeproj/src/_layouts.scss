@@ -25,6 +25,8 @@ body {
 	align-content: center;
 	grid-template-columns: repeat(3, auto);
 	padding-top: 30px;
+	font-size: 5rem;
+	text-align: center;
 	
 }
 
@@ -34,23 +36,46 @@ body {
     height: 90px;
 	background-color: $color-primary;
 	opacity: 0.5;
-
+	
 }
 
-.button{
+.grid__box:hover {
+	cursor: pointer;
+	background-color: $color-secondary;
+}
+
+.message {
+	font-size: 1rem;
+	text-align: center;
+	color: $color-secondary;
+	font-weight: bold;
+}
+
+
+.button {
 	display: flex;
-    justify-content: center;
+	justify-content: space-around;
 	align-content: center;
-	padding-top: 7rem;
-}
+	padding-top: 80px;
 
-.button__restart {
+&__submit {
 	border: 2px solid $color-tertiary;
 	border-radius: 5%;
     font-size: 1rem;
     padding: 10px 10px;
 	background-color: $color-tertiary;
 	color: $color-primary;
+}
+
+&__restart {
+	border: 2px solid $color-four;
+	border-radius: 5%;
+    font-size: 1rem;
+    padding: 10px 10px;
+	background-color: $color-four;
+	color: $color-primary;
 	
+	
+}
 }
 

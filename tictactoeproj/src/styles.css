@@ -21,6 +21,8 @@ body {
   align-content: center;
   grid-template-columns: repeat(3, auto);
   padding-top: 30px;
+  font-size: 5rem;
+  text-align: center;
 }
 
 .grid__box {
@@ -31,19 +33,38 @@ body {
   opacity: 0.5;
 }
 
-.button {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  padding-top: 7rem;
+.grid__box:hover {
+  cursor: pointer;
+  background-color: rgb(30, 133, 76);
 }
 
-.button__restart {
+.message {
+  font-size: 1rem;
+  text-align: center;
+  color: rgb(30, 133, 76);
+  font-weight: bold;
+}
+
+.button {
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  padding-top: 80px;
+}
+.button__submit {
   border: 2px solid rgb(86, 180, 180);
   border-radius: 5%;
   font-size: 1rem;
   padding: 10px 10px;
   background-color: rgb(86, 180, 180);
+  color: rgb(226, 226, 226);
+}
+.button__restart {
+  border: 2px solid rgb(147, 147, 147);
+  border-radius: 5%;
+  font-size: 1rem;
+  padding: 10px 10px;
+  background-color: rgb(147, 147, 147);
   color: rgb(226, 226, 226);
 }
 
