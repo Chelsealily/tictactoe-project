@@ -17,18 +17,8 @@ let currentPlayer = "O";
 let startState = ["", "", "", "", "", "", "", "", ""];
 let gameStarted = false;
 
-/*const winningCombos = [
-	[0, 1, 2],
-	[3, 4, 5],
-	[6, 7, 8],
-	[0, 3, 6],
-	[1, 4, 7],
-	[2, 5, 8],
-	[0, 4, 8],
-	[2, 4, 6] 
-]*/
 
-// handle start message
+// handle start messages
 if (startState=["", "", "", "", "", "", "", "", ""]) {
     messageText.innerText = "Pick a square to Start! ☝️ "
 }
@@ -36,12 +26,12 @@ if (startState=["", "", "", "", "", "", "", "", ""]) {
 
 // handle player clicks
 const handlePlayerClick = (clickedBox, index) => {
+    
     if(clickedBox.innerHTML === "" && currentPlayer){
         updateBoard(clickedBox, index);           
         changePlayer();
         messageText.innerText = "";  
         gameStarted = true;
-        //resultCheck(); 
     } else {
        //handleComputerTurn();
        return;
@@ -50,10 +40,10 @@ const handlePlayerClick = (clickedBox, index) => {
 
     gridBoxes.forEach((clickedBox, index) => 
         clickedBox.addEventListener("click", () => {
-            handlePlayerClick(clickedBox, index);
+            handlePlayerClick(clickedBox, index);  handleResultCheck();
     }));
 
- /* computers turn 
+ /*//computers turn 
 
 const handleComputerTurn = (clickedBox, index)  => {
     const random = Math.floor(Math.random() * gridBoxes.length);
@@ -63,50 +53,33 @@ const handleComputerTurn = (clickedBox, index)  => {
         if (clickedBox.innerHTML === "") {
         gridBoxes[random].innerHTML = xMove;
         currentPlayer = "O";    
+    
       } else {
       return
     
 }
-}}*/
+}} */
 
 
 //update board
 const updateBoard = (clickedBox, index) => {
     startState[index] = currentPlayer;
     clickedBox.innerHTML = currentPlayer;
-    clickedBox.classList.add(currentPlayer);
-    console.log(clickedBox.classList)
 }
 
 // change players
 const changePlayer = () => {
     if(currentPlayer === "O") {
-        gridClassSwap();
+       
+        messageText.innerText = "Player X's Turn";  
         currentPlayer = "X";
     } else {
-        gridClassSwap();
+        
         currentPlayer = "O";
+        messageText.innerText = "Player O's Turn";  
     }
 }
 
-// Change computer turn class
-const gridClassSwap = () => {
-    if(mainGrid.classList.contains("X")) {
-        mainGrid.classList.remove(xMove);
-        mainGrid.classList.add(oMove);
-    } else {
-        mainGrid.classList.remove(oMove);
-        mainGrid.classList.add(xMove);
-    }
-}
-
-
-/*reset individual boxes
-const resetBoxData = (clickedBox) => {
-    clickedBox.innerHTML = "";
-    clickedBox.classList.remove(xMove);
-    clickedBox.classList.add(oMove);
-}*/
 
 
 // handle restart game
@@ -119,7 +92,7 @@ const handleRestartGame = (event: Event) => {
     messageText.innerText = "Choose a square to start the game! :D "
     mainGrid.classList.remove(xMove);
     mainGrid.classList.add(oMove);
-    //gridBoxes.forEach((clickedBox) => resetBoxData(clickedBox));
+    
 
 }
 
@@ -127,16 +100,57 @@ restartButton.addEventListener("click", handleRestartGame);
 
 
 
-/*// constants
+// Result Check
 
-// check rows,columns diagonals
+const winningCombos = [
+	[0, 1, 2],
+	[3, 4, 5],
+	[6, 7, 8],
+	[0, 3, 6],
+	[1, 4, 7],
+	[2, 5, 8],
+	[0, 4, 8],
+	[2, 4, 6] 
+]
 
+const handleResultCheck = () => {
+    let roundWonX = false;
+    let roundWonO = false
+    for (let i = 0; i <= 7; i++) {
+        
+        const winPoss = winningCombos[i];
+        const first = startState[winPoss[0]];
+        const second = startState[winPoss[1]];
+        const third = startState[winPoss[2]];
+        
+        if(first === "" || second === "" || third === "") {
+            continue;
+        }
+        // Win & Message
+        if(first === "X" && first === second && second === third) {
+            roundWonX = true;
+            break;
+        }
 
+        if(first === "O" && first === second && second === third) {
+            roundWonO = true;
+            break;
+        }
+            if(i == 7 && !startState.includes ("")){
+                messageText.innerHTML = "its a draw - play again!";
+            break;
+        }
+       
+    } 
 
-const compTurn = spot []
-let p1 = [2, 4]
-p2 = [0, 2, 6, 8]
-p3 = [1, 3, 5, 7]
-
-
-*/
+    if (roundWonX) {
+        messageText.innerHTML = "congrats, you won xx";
+        gameStarted = false;
+        return;
+    }
+    if (roundWonO) {
+        messageText.innerHTML = "oooo you're a winner";
+        gameStarted = false;
+        return;
+    }
+}
