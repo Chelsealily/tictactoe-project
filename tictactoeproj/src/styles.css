@@ -38,6 +38,22 @@ body {
   background-color: rgb(30, 133, 76);
 }
 
+.grid__box--0, .grid__box--1, .grid__box--2 {
+  border-top: none;
+}
+
+.grid__box--6, .grid__box--7, .grid__box--8 {
+  border-bottom: none;
+}
+
+.grid__box--0, .grid__box--3, .grid__box--6 {
+  border-left: none;
+}
+
+.grid__box--2, .grid__box--5, .grid__box--8 {
+  border-right: none;
+}
+
 .message {
   font-size: 1rem;
   text-align: center;
