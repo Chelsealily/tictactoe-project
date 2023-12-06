@@ -1,4 +1,5 @@
-import './styles.scss'
+import "./styles.scss";
+import confetti, {Options} from "canvas-confetti";
 
 const gridBoxes = document.querySelectorAll<HTMLElement>(".grid__box")
 const mainGrid = document.querySelector<HTMLElement>(".grid")
@@ -13,6 +14,29 @@ if (!mainGrid || !messageArea || !messageText || !restartButton) {
 // defaults
 let currentPlayer = "O";
 let startState = ["", "", "", "", "", "", "", "", ""];
+
+// confetti 
+
+const X = confetti.shapeFromText({ text: "❌"});
+const tic= confetti.shapeFromText({ text: "💊"});
+
+const opX : Options = {
+    particleCount: 100,
+    spread: 180,
+    colors: ["#ffffff","#77DD77","#000000"],
+    shapes: ["star", X, tic],
+    scalar:5
+}
+
+const O = confetti.shapeFromText({ text: "O"});
+const opO : Options = {
+    particleCount: 100,
+    spread: 180,
+    colors: ["#ffffff","#77DD77","#FFA500"],
+    shapes: ["circle", O, tic],
+    scalar:5,
+}
+
 
 // handle start messages
 if (startState=["", "", "", "", "", "", "", "", ""]) {
@@ -64,7 +88,7 @@ const handleRestartGame = () => {
     currentPlayer="O";
     gridBoxes.forEach(box => box.innerHTML = "")
     messageText.innerText = "Pick a square to Start! ☝️ "
-  
+    
 }
 
 restartButton.addEventListener("click", handleRestartGame);
@@ -116,14 +140,14 @@ const handleResultCheck = () => {
     } 
 // winning messages
     if (roundWonX) {
-        messageText.innerHTML = "congrats, you won xx";
-        
+        messageText.innerHTML = "❌congrats, X won!❌";
+        confetti(opX)
         return;
     }
     
     if (roundWonO) {
-        messageText.innerHTML = "oooo you're a winner";
-        
+        messageText.innerHTML = "💊OOOO you're a winner💊";
+        confetti(opO)
         return;
     }
 }
