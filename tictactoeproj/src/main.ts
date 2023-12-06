@@ -17,6 +17,8 @@ let startState = ["", "", "", "", "", "", "", "", ""];
 // handle start messages
 if (startState=["", "", "", "", "", "", "", "", ""]) {
     messageText.innerText = "Pick a square to Start! ☝️ "
+    restartButton.style.visibility="hidden";
+    
 }
 
 
@@ -27,7 +29,8 @@ const handlePlayerClick = (clickedBox: HTMLElement, index: number) => {
         updateBoard(clickedBox, index);           
         changePlayer();
         messageText.innerText = "";  
-        
+        restartButton.style.visibility="visible";
+    
     } else {
         return;
     }
@@ -61,6 +64,7 @@ const handleRestartGame = () => {
     currentPlayer="O";
     gridBoxes.forEach(box => box.innerHTML = "")
     messageText.innerText = "Pick a square to Start! ☝️ "
+  
 }
 
 restartButton.addEventListener("click", handleRestartGame);
@@ -105,6 +109,7 @@ const handleResultCheck = () => {
         // Draw 
             if(i == 7 && !startState.includes ("")){
                 messageText.innerHTML = "its a draw - play again!";
+               
             break;
         }
        
@@ -112,28 +117,13 @@ const handleResultCheck = () => {
 // winning messages
     if (roundWonX) {
         messageText.innerHTML = "congrats, you won xx";
+        
         return;
     }
     
     if (roundWonO) {
         messageText.innerHTML = "oooo you're a winner";
+        
         return;
     }
 }
-
-
-/*
-//computers turn 
-
-const handleComputerTurn = (clickedBox, index)  => {
-    const random = Math.floor(Math.random() * gridBoxes.length);
- 
-    if (!currentPlayer && clickedBox.innerHTML === "") {
-        gridBoxes[random].innerHTML = "X";
-        currentPlayer = "O";    
-    
-      } else {
-      return
-    
-}
-}*/
