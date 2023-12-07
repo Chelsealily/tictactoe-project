@@ -6,6 +6,9 @@ const mainGrid = document.querySelector<HTMLElement>(".grid")
 const messageArea = document.querySelector<HTMLElement>(".message")
 const messageText = document.querySelector<HTMLElement>(".message__text")
 const restartButton = document.querySelector<HTMLButtonElement>(".button__restart")
+const restartAudio = new Audio("./src/shakesound.mp3");
+const yayAudio = new Audio("./src/yay.mp3");
+const drawAudio = new Audio("./src/drawsound.mp3");
 
 if (!mainGrid || !messageArea || !messageText || !restartButton) {
     throw new Error("issue with a query selector");
@@ -88,7 +91,8 @@ const handleRestartGame = () => {
     currentPlayer="O";
     gridBoxes.forEach(box => box.innerHTML = "")
     messageText.innerText = "Pick a square to Start! ☝️ "
-    
+    restartAudio.play();
+
 }
 
 restartButton.addEventListener("click", handleRestartGame);
@@ -133,21 +137,40 @@ const handleResultCheck = () => {
         // Draw 
             if(i == 7 && !startState.includes ("")){
                 messageText.innerHTML = "its a draw - play again!";
-               
+                drawAudio.play()
             break;
         }
        
     } 
+
+/* notes for computer player
+
+const robotTurn = () => {
+    for (let i = 0; i <= 8; i++) {
+
+        const position = priorityPicks[i];
+
+        if(position === "") {
+            startState[index] = "X"
+            break;
+        }
+    }
+const priorityPicks = [4, 0, 2, 6, 8,
+	1, 3, 5, 7] */
+
+
 // winning messages
     if (roundWonX) {
         messageText.innerHTML = "❌congrats, X won!❌";
         confetti(opX)
+        yayAudio.play()
         return;
     }
     
     if (roundWonO) {
         messageText.innerHTML = "💊OOOO you're a winner💊";
         confetti(opO)
+        yayAudio.play()
         return;
     }
 }
