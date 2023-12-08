@@ -21,7 +21,7 @@ body {
   align-content: center;
   grid-template-columns: repeat(3, auto);
   padding-top: 30px;
-  font-size: 5rem;
+  font-size: 4rem;
   text-align: center;
 }
 
@@ -131,6 +131,7 @@ body {
     padding-top: 80px;
   }
   .grid {
+    font-size: 6rem;
     width: 100vw;
   }
   .grid__box {

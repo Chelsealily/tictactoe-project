@@ -15,7 +15,7 @@ if (!mainGrid || !messageArea || !messageText || !restartButton) {
   }
 
 // defaults
-let currentPlayer = "O";
+let currentPlayer = "🔵";
 let startState = ["", "", "", "", "", "", "", "", ""];
 
 // confetti 
@@ -45,7 +45,6 @@ const opO : Options = {
 if (startState=["", "", "", "", "", "", "", "", ""]) {
     messageText.innerText = "Pick a square to Start! ☝️ "
     restartButton.style.visibility="hidden";
-    
 }
 
 
@@ -68,6 +67,7 @@ const handlePlayerClick = (clickedBox: HTMLElement, index: number) => {
             handlePlayerClick(clickedBox, index);  handleResultCheck();
     }));
 
+    
 
 //update board
 const updateBoard = (clickedBox: HTMLElement, index: number) => {
@@ -77,10 +77,10 @@ const updateBoard = (clickedBox: HTMLElement, index: number) => {
 
 // change players
 const changePlayer = () => {
-    if(currentPlayer === "O") {
-        currentPlayer = "X";
+    if(currentPlayer === "🔵") {
+        currentPlayer = "❎";
     } else {
-        currentPlayer = "O";
+        currentPlayer = "🔵";
     }
 }
 
@@ -88,7 +88,7 @@ const changePlayer = () => {
 
 const handleRestartGame = () => {
     startState = ["", "", "", "", "", "", "", "", ""]
-    currentPlayer="O";
+    currentPlayer="🔵";
     gridBoxes.forEach(box => box.innerHTML = "")
     messageText.innerText = "Pick a square to Start! ☝️ "
     restartAudio.play();
@@ -125,12 +125,12 @@ const handleResultCheck = () => {
             continue;
         }
        
-        if(first === "X" && first === second && second === third) {
+        if(first === "❎" && first === second && second === third) {
             roundWonX = true;
             break;
         }
 
-        if(first === "O" && first === second && second === third) {
+        if(first === "🔵" && first === second && second === third) {
             roundWonO = true;
             break;
         }
@@ -174,3 +174,14 @@ const priorityPicks = [4, 0, 2, 6, 8,
         return;
     }
 }
+
+
+/* handle computer turn 
+const handleComputerTurn = ()  => {
+    const random = Math.floor(Math.random() * gridBoxes.length);
+    if (startState[index]== "" && currentPlayer=="X") {
+        gridBoxes[random].innerHTML = "X";
+        currentPlayer = "O"
+      } else {
+        return
+      }   */
