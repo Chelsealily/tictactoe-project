@@ -6,11 +6,17 @@ const mainGrid = document.querySelector<HTMLElement>(".grid")
 const messageArea = document.querySelector<HTMLElement>(".message")
 const messageText = document.querySelector<HTMLElement>(".message__text")
 const restartButton = document.querySelector<HTMLButtonElement>(".button__restart")
+const multiPlayer = document.querySelector<HTMLButtonElement>(".button__multi")
+const compGame = document.querySelector<HTMLButtonElement>(".button__comp")
+
+// audios
 const restartAudio = new Audio("./src/shakesound.mp3");
 const yayAudio = new Audio("./src/yay.mp3");
 const drawAudio = new Audio("./src/drawsound.mp3");
+const clickAudio= new Audio("./src/click.mp3")
 
-if (!mainGrid || !messageArea || !messageText || !restartButton) {
+
+if (!mainGrid || !messageArea || !messageText || !restartButton || !multiPlayer || !compGame) {
     throw new Error("issue with a query selector");
   }
 
@@ -56,12 +62,11 @@ const handlePlayerClick = (clickedBox: HTMLElement, index: number) => {
         changePlayer();
         messageText.innerText = "";  
         restartButton.style.visibility="visible";
-    
+        clickAudio.play()
     } else {
         return;
     }
 }
-
     gridBoxes.forEach((clickedBox, index) => 
         clickedBox.addEventListener("click", () => {
             handlePlayerClick(clickedBox, index);  handleResultCheck();
@@ -73,9 +78,12 @@ const handlePlayerClick = (clickedBox: HTMLElement, index: number) => {
 const updateBoard = (clickedBox: HTMLElement, index: number) => {
     startState[index] = currentPlayer;
     clickedBox.innerHTML = currentPlayer;
+    
+    console.log(startState[index])
 }
 
-// change players
+
+// change players (for Multiplayer)
 const changePlayer = () => {
     if(currentPlayer === "🔵") {
         currentPlayer = "❎";
@@ -83,6 +91,9 @@ const changePlayer = () => {
         currentPlayer = "🔵";
     }
 }
+
+
+//handleComputerTurn(); 
 
 // handle restart game
 
@@ -143,22 +154,6 @@ const handleResultCheck = () => {
        
     } 
 
-/* notes for computer player
-
-const robotTurn = () => {
-    for (let i = 0; i <= 8; i++) {
-
-        const position = priorityPicks[i];
-
-        if(position === "") {
-            startState[index] = "X"
-            break;
-        }
-    }
-const priorityPicks = [4, 0, 2, 6, 8,
-	1, 3, 5, 7] */
-
-
 // winning messages
     if (roundWonX) {
         messageText.innerHTML = "❌congrats, X won!❌";
@@ -176,12 +171,17 @@ const priorityPicks = [4, 0, 2, 6, 8,
 }
 
 
-/* handle computer turn 
+// handle computer turn 
 const handleComputerTurn = ()  => {
     const random = Math.floor(Math.random() * gridBoxes.length);
-    if (startState[index]== "" && currentPlayer=="X") {
-        gridBoxes[random].innerHTML = "X";
-        currentPlayer = "O"
-      } else {
-        return
-      }   */
+    
+gridBoxes.forEach(box => {
+
+    //const playerO = box.innerHTML !== ("🔵")
+    const playerX = box.innerHTML !== ("❎")
+
+    if (box.innerHTML === ("") && playerX ) {
+        gridBoxes[random].innerHTML = "❎";
+        currentPlayer = "🔵"
+}})
+}
