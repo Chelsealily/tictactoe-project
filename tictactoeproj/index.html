@@ -8,8 +8,11 @@
   </head>
   <body>
     <body>
-     
-      <h1 class="heading">Let's play!</h1>
+      <h2 class="heading">Lets play?</h2>
+      <div class="chooseMode">
+        <input name="opponent" id="o1" type="radio" value="computer"> <label for="o1"> Vs Computer </label>
+        <input name="opponent" id="o2" type="radio" value="two" checked><label for="o2"> 2 Player </label>
+      </div>
       <div class="grid">
         <div class="grid__box grid__box--0" ></div>
          <div class="grid__box grid__box--1" ></div>
@@ -27,11 +30,6 @@
           
           <button class="button__restart">Reset</button>
        </div></div>
-<!-- Mode options -->
-       <div class="chooseMode">
-        <h2>How would you like to play?</h2>
-          <button class="button__multi">2 Player</button>
-          <button class="button__comp">Vs Computer</button>
 
      </body>
     <script type="module" src="/src/main.ts"></script>

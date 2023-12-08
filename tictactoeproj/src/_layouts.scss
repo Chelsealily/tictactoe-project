@@ -18,6 +18,14 @@ body {
 	font-size: 1.8rem;
 }
 
+.chooseMode {
+	display: flex;
+    text-align: center;
+	justify-content: center;
+	color: $color-five;
+	font-size: 1.2rem;
+}
+
 .grid {
 	width: 100vw;
 	display: grid;
@@ -73,15 +81,6 @@ body {
 	justify-content: space-around;
 	align-content: center;
 	padding-top: 80px;
-
-&__submit {
-	border: 2px solid $color-tertiary;
-	border-radius: 5%;
-    font-size: 1rem;
-    padding: 10px 10px;
-	background-color: $color-tertiary;
-	color: $color-primary;
-}
 
 &__restart {
 	border: 2px solid $color-four;

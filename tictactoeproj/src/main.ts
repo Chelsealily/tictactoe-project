@@ -6,8 +6,6 @@ const mainGrid = document.querySelector<HTMLElement>(".grid")
 const messageArea = document.querySelector<HTMLElement>(".message")
 const messageText = document.querySelector<HTMLElement>(".message__text")
 const restartButton = document.querySelector<HTMLButtonElement>(".button__restart")
-const multiPlayer = document.querySelector<HTMLButtonElement>(".button__multi")
-const compGame = document.querySelector<HTMLButtonElement>(".button__comp")
 
 // audios
 const restartAudio = new Audio("./src/shakesound.mp3");
@@ -16,11 +14,12 @@ const drawAudio = new Audio("./src/drawsound.mp3");
 const clickAudio= new Audio("./src/click.mp3")
 
 
-if (!mainGrid || !messageArea || !messageText || !restartButton || !multiPlayer || !compGame) {
+if (!mainGrid || !messageArea || !messageText || !restartButton) {
     throw new Error("issue with a query selector");
   }
 
 // defaults
+let twoPlayer=true;
 let currentPlayer = "🔵";
 let startState = ["", "", "", "", "", "", "", "", ""];
 
@@ -47,6 +46,13 @@ const opO : Options = {
 }
 
 
+
+// handle mode choice
+const handleModeChoice = () => {
+   
+ };
+
+
 // handle start messages
 if (startState=["", "", "", "", "", "", "", "", ""]) {
     messageText.innerText = "Pick a square to Start! ☝️ "
@@ -59,10 +65,10 @@ const handlePlayerClick = (clickedBox: HTMLElement, index: number) => {
     
     if(clickedBox.innerHTML === "" && currentPlayer){
         updateBoard(clickedBox, index);           
+        clickAudio.play()
         changePlayer();
         messageText.innerText = "";  
         restartButton.style.visibility="visible";
-        clickAudio.play()
     } else {
         return;
     }
@@ -78,22 +84,31 @@ const handlePlayerClick = (clickedBox: HTMLElement, index: number) => {
 const updateBoard = (clickedBox: HTMLElement, index: number) => {
     startState[index] = currentPlayer;
     clickedBox.innerHTML = currentPlayer;
-    
-    console.log(startState[index])
 }
 
 
 // change players (for Multiplayer)
 const changePlayer = () => {
-    if(currentPlayer === "🔵") {
+
+    if (twoPlayer) {
+        if(currentPlayer === "🔵") {
         currentPlayer = "❎";
+        clickAudio.play();
     } else {
         currentPlayer = "🔵";
     }
+    } if (!twoPlayer) {
+        if(currentPlayer === "🔵") {
+            handleComputerTurn(); 
+        } else {
+            currentPlayer = "🔵";
+        }
+    }
+    
 }
 
 
-//handleComputerTurn(); 
+
 
 // handle restart game
 
