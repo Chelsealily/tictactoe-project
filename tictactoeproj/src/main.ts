@@ -68,15 +68,12 @@ if (startState=["", "", "", "", "", "", "", "", ""]) {
     restartButton.style.visibility="hidden";
 }
 
-
 // handle player clicks
 const handlePlayerClick = (clickedBox: HTMLElement, index: number) => {
-    const notPlayerO = clickedBox.innerHTML !== "🔵"
-    const notPlayerX = clickedBox.innerHTML !== "❎"
 
     if (currentPlayer) {
 
-    if(clickedBox.innerHTML === "" && notPlayerO && notPlayerX){
+    if(clickedBox.innerHTML === ""){
         updateBoard(clickedBox, index);  
         clickAudio.play()
         changePlayer();
@@ -94,7 +91,6 @@ const handlePlayerClick = (clickedBox: HTMLElement, index: number) => {
     }));
 
     
-
 //update board
 const updateBoard = (clickedBox:HTMLElement, index: number) => {
     startState[index] = currentPlayer;
@@ -113,35 +109,42 @@ const changePlayer = () => {
 
     } if (!twoPlayer) {
         if(currentPlayer === "🔵") {
+            handleResultCheck();
             handleComputerTurn(); 
         } else {
+            handleResultCheck();
             currentPlayer = "🔵";
         }
     }
-    
 }
 
 
 // handle computer turn 
-const handleComputerTurn = (index: number)  => {
-   let emptyBoxes = [];
-    let random;
-    currentPlayer="❎";
+const handleComputerTurn = (clickedBox: HTMLElement, index: number)  => {
+   let emptyBoxes: string[] = []
+    let random
+    let indNum: number[] = []
+    currentPlayer = "❎"
 
+let i = -1
 gridBoxes.forEach(box => {
+    i++
     if (box.innerText === "") {
-        emptyBoxes.push(box);
+        emptyBoxes.push(box)
+        indNum.push(i);
 } 
 })
-    random = Math.ceil(Math.random() * emptyBoxes.length)-1;
-    clickAudio.play();
-    emptyBoxes[random].innerText = "❎";
 
-    startState[index]= "❎";
-    console.log(startState[index]);
+random = [Math.floor(Math.random()*emptyBoxes.length)];
+
+    clickAudio.play();
+    clickedBox = emptyBoxes[random]
+    index = Number(indNum[random])
+
+    updateBoard(clickedBox, index); 
     currentPlayer = "🔵";
     twoPlayer=false;
-    handleResultCheck();
+
 }
 
 
@@ -173,7 +176,8 @@ const winningCombos = [
 
 const handleResultCheck = () => {
     let roundWonX = false;
-    let roundWonO = false
+    let roundWonO = false;
+    let roundDraw = false;
     for (let i = 0; i <= 7; i++) {
         
         const winPoss = winningCombos[i];
@@ -185,7 +189,7 @@ const handleResultCheck = () => {
             continue;
         }
        
-        if(first === "❎" && first === second && second === third) {
+        if(first == "❎" && first === second && second === third) {
             roundWonX = true;
             break;
         }
@@ -195,11 +199,12 @@ const handleResultCheck = () => {
             break;
         }
         // Draw 
-            if(i == 7 && !startState.includes ("")){
-                messageText.innerHTML = "its a draw - play again!";
-                drawAudio.play()
+        if (i == 7) {
+            if(!startState.includes("")){
+                roundDraw = true;
             break;
         }
+    }
        
     } 
 
@@ -217,7 +222,11 @@ const handleResultCheck = () => {
         yayAudio.play()
         return;
     }
+
+    if (roundDraw) {
+        messageText.innerHTML = "its a draw - play again!";
+        drawAudio.play()
+        return;
+    }
 }
-
-
 
