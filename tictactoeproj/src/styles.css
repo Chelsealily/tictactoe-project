@@ -67,13 +67,14 @@ body {
   text-align: center;
   color: rgb(30, 133, 76);
   font-weight: bold;
+  padding-top: 50px;
 }
 
 .button {
   display: flex;
   justify-content: space-around;
   align-content: center;
-  padding-top: 80px;
+  padding-top: 30px;
 }
 .button__restart {
   border: 2px solid rgb(147, 147, 147);
@@ -130,6 +131,9 @@ body {
     font-size: 3rem;
     padding-top: 80px;
   }
+  .chooseMode {
+    font-size: 2.5em;
+  }
   .grid {
     font-size: 6rem;
     width: 100vw;
@@ -139,6 +143,7 @@ body {
     height: 150px;
   }
   .message {
+    padding-top: 20px;
     font-size: 2rem;
   }
   .button__restart {

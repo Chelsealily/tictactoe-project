@@ -6,15 +6,19 @@ const mainGrid = document.querySelector<HTMLElement>(".grid")
 const messageArea = document.querySelector<HTMLElement>(".message")
 const messageText = document.querySelector<HTMLElement>(".message__text")
 const restartButton = document.querySelector<HTMLButtonElement>(".button__restart")
+const compGame = document.querySelector<HTMLInputElement>(".playComp")
+const twoGame = document.querySelector<HTMLInputElement>(".playTwo")
 
 // audios
-const restartAudio = new Audio("./src/shakesound.mp3");
-const yayAudio = new Audio("./src/yay.mp3");
-const drawAudio = new Audio("./src/drawsound.mp3");
-const clickAudio= new Audio("./src/click.mp3")
+const restartAudio = new Audio("./src/assets/shakesound.mp3");
+const yayAudio = new Audio("./src/assets/yay.mp3");
+const drawAudio = new Audio("./src/assets/drawsound.mp3");
+const clickAudio= new Audio("./src/assets/click.mp3")
+const errorAudio= new Audio("./src/assets/error.mp3")
 
 
-if (!mainGrid || !messageArea || !messageText || !restartButton) {
+if (!mainGrid || !messageArea || !messageText || !restartButton || !compGame
+    || !twoGame) {
     throw new Error("issue with a query selector");
   }
 
@@ -46,12 +50,17 @@ const opO : Options = {
 }
 
 
+// handle comp game choice
+compGame.addEventListener("click" , () => {
+    twoPlayer=false;
+    handlePlayerClick(); 
+})
 
-// handle mode choice
-const handleModeChoice = () => {
-   
- };
-
+// handle 2 player game
+twoGame.addEventListener("click" , () => {
+    twoPlayer=true;
+    handlePlayerClick(); 
+})
 
 // handle start messages
 if (startState=["", "", "", "", "", "", "", "", ""]) {
@@ -62,17 +71,23 @@ if (startState=["", "", "", "", "", "", "", "", ""]) {
 
 // handle player clicks
 const handlePlayerClick = (clickedBox: HTMLElement, index: number) => {
-    
-    if(clickedBox.innerHTML === "" && currentPlayer){
-        updateBoard(clickedBox, index);           
+    const notPlayerO = clickedBox.innerHTML !== "🔵"
+    const notPlayerX = clickedBox.innerHTML !== "❎"
+
+    if (currentPlayer) {
+
+    if(clickedBox.innerHTML === "" && notPlayerO && notPlayerX){
+        updateBoard(clickedBox, index);  
         clickAudio.play()
         changePlayer();
         messageText.innerText = "";  
         restartButton.style.visibility="visible";
     } else {
+        errorAudio.play()
+        alert("That space is taken dude")
         return;
     }
-}
+}}
     gridBoxes.forEach((clickedBox, index) => 
         clickedBox.addEventListener("click", () => {
             handlePlayerClick(clickedBox, index);  handleResultCheck();
@@ -81,22 +96,21 @@ const handlePlayerClick = (clickedBox: HTMLElement, index: number) => {
     
 
 //update board
-const updateBoard = (clickedBox: HTMLElement, index: number) => {
+const updateBoard = (clickedBox:HTMLElement, index: number) => {
     startState[index] = currentPlayer;
     clickedBox.innerHTML = currentPlayer;
 }
 
-
-// change players (for Multiplayer)
+// change players
 const changePlayer = () => {
 
     if (twoPlayer) {
         if(currentPlayer === "🔵") {
         currentPlayer = "❎";
-        clickAudio.play();
     } else {
         currentPlayer = "🔵";
     }
+
     } if (!twoPlayer) {
         if(currentPlayer === "🔵") {
             handleComputerTurn(); 
@@ -108,9 +122,28 @@ const changePlayer = () => {
 }
 
 
+// handle computer turn 
+const handleComputerTurn = (index: number)  => {
+   let emptyBoxes = [];
+    let random;
+    currentPlayer="❎";
 
+gridBoxes.forEach(box => {
+    if (box.innerText === "") {
+        emptyBoxes.push(box);
+} 
+})
+    random = Math.ceil(Math.random() * emptyBoxes.length)-1;
+    clickAudio.play();
+    emptyBoxes[random].innerText = "❎";
 
-// handle restart game
+    startState[index]= "❎";
+    console.log(startState[index]);
+    currentPlayer = "🔵";
+    twoPlayer=false;
+    handleResultCheck();
+}
+
 
 const handleRestartGame = () => {
     startState = ["", "", "", "", "", "", "", "", ""]
@@ -118,7 +151,8 @@ const handleRestartGame = () => {
     gridBoxes.forEach(box => box.innerHTML = "")
     messageText.innerText = "Pick a square to Start! ☝️ "
     restartAudio.play();
-
+    twoPlayer = true;
+    twoGame.checked = true;
 }
 
 restartButton.addEventListener("click", handleRestartGame);
@@ -186,17 +220,4 @@ const handleResultCheck = () => {
 }
 
 
-// handle computer turn 
-const handleComputerTurn = ()  => {
-    const random = Math.floor(Math.random() * gridBoxes.length);
-    
-gridBoxes.forEach(box => {
 
-    //const playerO = box.innerHTML !== ("🔵")
-    const playerX = box.innerHTML !== ("❎")
-
-    if (box.innerHTML === ("") && playerX ) {
-        gridBoxes[random].innerHTML = "❎";
-        currentPlayer = "🔵"
-}})
-}

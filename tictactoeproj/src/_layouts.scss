@@ -26,6 +26,7 @@ body {
 	font-size: 1.2rem;
 }
 
+
 .grid {
 	width: 100vw;
 	display: grid;
@@ -73,6 +74,7 @@ body {
 	text-align: center;
 	color: $color-secondary;
 	font-weight: bold;
+	padding-top: 50px;
 }
 
 
@@ -80,7 +82,7 @@ body {
 	display: flex;
 	justify-content: space-around;
 	align-content: center;
-	padding-top: 80px;
+	padding-top: 30px;
 
 &__restart {
 	border: 2px solid $color-four;
