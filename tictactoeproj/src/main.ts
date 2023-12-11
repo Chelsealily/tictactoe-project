@@ -84,6 +84,7 @@ const handlePlayerClick = (clickedBox: HTMLElement, index: number) => {
         alert("That space is taken dude")
         return;
     }
+
 }}
     gridBoxes.forEach((clickedBox, index) => 
         clickedBox.addEventListener("click", () => {
@@ -122,7 +123,6 @@ const changePlayer = () => {
 // handle computer turn 
 const handleComputerTurn = (clickedBox: HTMLElement, index: number)  => {
    let emptyBoxes: any[] = []
-   // let random:number;
     let indNum: number[] = []
     currentPlayer = "❎"
 
