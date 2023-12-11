@@ -121,8 +121,8 @@ const changePlayer = () => {
 
 // handle computer turn 
 const handleComputerTurn = (clickedBox: HTMLElement, index: number)  => {
-   let emptyBoxes: string[] = []
-    let random
+   let emptyBoxes: any[] = []
+   // let random:number;
     let indNum: number[] = []
     currentPlayer = "❎"
 
@@ -135,12 +135,11 @@ gridBoxes.forEach(box => {
 } 
 })
 
-random = [Math.floor(Math.random()*emptyBoxes.length)];
+    clickedBox = emptyBoxes[Math.floor(Math.random()*emptyBoxes.length)];
 
     clickAudio.play();
-    clickedBox = emptyBoxes[random]
-    index = Number(indNum[random])
-
+    index = Number(indNum[clickedBox])
+    
     updateBoard(clickedBox, index); 
     currentPlayer = "🔵";
     twoPlayer=false;
@@ -224,7 +223,7 @@ const handleResultCheck = () => {
     }
 
     if (roundDraw) {
-        messageText.innerHTML = "its a draw - play again!";
+        messageText.innerHTML = "🤪its a draw - play again!🤪";
         drawAudio.play()
         return;
     }
