@@ -14,6 +14,14 @@ body {
   font-size: 1.8rem;
 }
 
+.chooseMode {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  color: rgb(17, 17, 17);
+  font-size: 1.2rem;
+}
+
 .grid {
   width: 100vw;
   display: grid;
@@ -21,7 +29,7 @@ body {
   align-content: center;
   grid-template-columns: repeat(3, auto);
   padding-top: 30px;
-  font-size: 5rem;
+  font-size: 4rem;
   text-align: center;
 }
 
@@ -59,21 +67,14 @@ body {
   text-align: center;
   color: rgb(30, 133, 76);
   font-weight: bold;
+  padding-top: 50px;
 }
 
 .button {
   display: flex;
   justify-content: space-around;
   align-content: center;
-  padding-top: 80px;
-}
-.button__submit {
-  border: 2px solid rgb(86, 180, 180);
-  border-radius: 5%;
-  font-size: 1rem;
-  padding: 10px 10px;
-  background-color: rgb(86, 180, 180);
-  color: rgb(226, 226, 226);
+  padding-top: 30px;
 }
 .button__restart {
   border: 2px solid rgb(147, 147, 147);
@@ -82,6 +83,44 @@ body {
   padding: 10px 10px;
   background-color: rgb(147, 147, 147);
   color: rgb(226, 226, 226);
+}
+.button .button__restart:hover {
+  animation: shake 0.5s;
+}
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -92,7 +131,11 @@ body {
     font-size: 3rem;
     padding-top: 80px;
   }
+  .chooseMode {
+    font-size: 2.5em;
+  }
   .grid {
+    font-size: 6rem;
     width: 100vw;
   }
   .grid__box {
@@ -100,6 +143,7 @@ body {
     height: 150px;
   }
   .message {
+    padding-top: 20px;
     font-size: 2rem;
   }
   .button__restart {
