@@ -53,13 +53,13 @@ const opO : Options = {
 // handle comp game choice
 compGame.addEventListener("click" , () => {
     twoPlayer=false;
-    handlePlayerClick(); 
+    
 })
 
 // handle 2 player game
 twoGame.addEventListener("click" , () => {
     twoPlayer=true;
-    handlePlayerClick(); 
+   
 })
 
 // handle start messages
@@ -121,7 +121,7 @@ const changePlayer = () => {
 
 
 // handle computer turn 
-const handleComputerTurn = (clickedBox: HTMLElement, index: number)  => {
+const handleComputerTurn = ()  => {
    let emptyBoxes: any[] = []
     let indNum: number[] = []
     currentPlayer = "❎"
@@ -135,10 +135,10 @@ gridBoxes.forEach(box => {
 } 
 })
 
-    clickedBox = emptyBoxes[Math.floor(Math.random()*emptyBoxes.length)];
+    let clickedBox = emptyBoxes[Math.floor(Math.random()*emptyBoxes.length)];
 
     clickAudio.play();
-    index = Number(indNum[clickedBox])
+    let index = Number(indNum[clickedBox])
     
     updateBoard(clickedBox, index); 
     currentPlayer = "🔵";
