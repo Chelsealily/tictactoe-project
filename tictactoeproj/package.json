@@ -1,5 +1,7 @@
 {
   "name": "tictactoeproj",
+  "homepage": "https://github.com/Chelsealily/tictactoe-project",
+  "author": "chelsea-li",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +12,7 @@
   },
   "devDependencies": {
     "@types/canvas-confetti": "^1.6.4",
+    "gh-pages": "^6.1.1",
     "sass": "^1.69.5",
     "typescript": "^5.2.2",
     "vite": "^5.0.0"
